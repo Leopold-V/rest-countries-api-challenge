@@ -1,12 +1,15 @@
 <template>
 <div id="container_filters">
-    <div id="search_country">
-        <input 
-            type="text"
-            placeholder="Search for a country..."
-        />
-        <i class="fas fa-search"></i>
-    </div>
+    <form @submit="handleSubmit">
+        <div id="search_country">
+            <input 
+                v-model="input"
+                type="text"
+                placeholder="Search for a country..."
+            />
+            <button><i class="fas fa-search"></i></button>
+        </div>
+    </form>
     <div id="region_filter">
         <select>
             <option>Filter by Region</option>
@@ -21,6 +24,35 @@
 
 </template>
 <script>
+export default {
+    props: {
+        countries: {
+            type: Object,
+            required: true,
+        },
+        setCountries: {
+            type: Function,
+            required: true,
+        }
+    },
+    data() {
+        let input = '';
+        return {
+            input
+        }
+    },
+    methods: {
+        handleSubmit: async function(e) {
+            e.preventDefault();
+            if (this.input) {
+                const response = await fetch(`https://restcountries.eu/rest/v2/name/${this.input}`)
+                const json = await response.json();
+                this.$emit('update-countries', json);
+            }
+        }
+    }
+}
+
 </script>
 <style>
 #container_filters {
@@ -44,15 +76,21 @@ input:focus {
     outline: none;
 }
 
-input:focus + i {
+input:focus + button > i {
     color: rgb(85, 85, 85);
 }
 
 i {
     color: rgb(204, 204, 204);
-    padding: 0 2rem;
+    padding: 1rem 2rem;
     font-size: 18px;
     transition: all .3s;
+    cursor: pointer;
+}
+button {
+    border: none;
+    background: transparent;
+    padding: 0;
 }
 #search_country {
     background: white;

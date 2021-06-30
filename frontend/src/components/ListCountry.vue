@@ -1,35 +1,21 @@
 <template>
     <div id="container_list">
-        <ul class="country_list" v-for="country in countries">
-            <li class="country_item">
-                <img class="country_flag" v-bind:src="country.flag" alt="flag"/>
-                <div class="country_body">
-                    <h2>{{ country.name }}</h2>
-                    <div><span style="font-weight: bold">Population :</span> {{country.population}} </div>
-                    <div><span style="font-weight: bold">Region :</span> {{country.region}} </div>
-                    <div><span style="font-weight: bold">Capital :</span> {{country.capital}} </div>
-                </div>
-            </li>
+        <ul class="country_list">
+            <CardCountry v-bind:countries="countries" />
         </ul>
     </div>
 </template>
 <script>
+import CardCountry from './CardCountry.vue';
+
 export default {
-    data() {
-        const countries = [];
-        return {
-            countries
-        }
+    components: {
+        CardCountry
     },
-    created() {
-        this.fetchCountry();
-    },
-    methods: {
-        async fetchCountry() {
-            const response = await fetch('https://restcountries.eu/rest/v2/all');
-            const json = await response.json();
-            this.countries = json;
-            console.log(json);
+    props: {
+        countries: {
+            type: Object,
+            required: true,
         },
     },
 }
