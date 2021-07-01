@@ -1,8 +1,8 @@
 <template>
 <div id="container_filters">
-    <form @submit="handleSubmit">
+    <form>
         <div id="search_country">
-            <input 
+            <input
                 v-model="input"
                 type="text"
                 placeholder="Search for a country..."
@@ -11,8 +11,8 @@
         </div>
     </form>
     <div id="region_filter">
-        <select>
-            <option>Filter by Region</option>
+        <select v-model="region">
+            <option value="">Filter by Region</option>
             <option>Africa</option>
             <option>America</option>
             <option>Asia</option>
@@ -29,28 +29,39 @@ export default {
         countries: {
             type: Object,
             required: true,
-        },
-        setCountries: {
-            type: Function,
-            required: true,
         }
     },
     data() {
         let input = '';
+        let region = '';
         return {
-            input
+            input,
+            region
         }
     },
     methods: {
-        handleSubmit: async function(e) {
-            e.preventDefault();
-            if (this.input) {
-                const response = await fetch(`https://restcountries.eu/rest/v2/name/${this.input}`)
-                const json = await response.json();
-                this.$emit('update-countries', json);
+        filter() {
+            let newCountries = [];
+            if (this.input && this.region) {
+                newCountries = this.countries.filter((country) => country.name.toLowerCase().match(this.input.toLowerCase()) && country.region === this.region);
             }
+            if (!this.input) {
+                newCountries = this.countries.filter((country) => country.region === this.region);
+            }
+            if (!this.region) {
+                newCountries = this.countries.filter((country) => country.name.toLowerCase().match(this.input.toLowerCase()));
+            }
+            this.$emit('update-countries', newCountries);
         }
-    }
+    },
+    watch: {
+        input: function () {
+            this.filter();
+        },
+        region: function () {
+            this.filter();
+        },
+    },
 }
 
 </script>

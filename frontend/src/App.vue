@@ -1,6 +1,6 @@
 <template>
   <Header />
-  <MainContent />
+  <router-view></router-view>
 </template>
 
 <script>
@@ -24,6 +24,10 @@ body {
 ul {
   list-style: none;
   padding: 0;
+}
+a {
+  text-decoration: none;
+  color: inherit;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

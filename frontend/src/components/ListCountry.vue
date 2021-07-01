@@ -1,10 +1,11 @@
 <template>
     <div id="container_list">
         <ul class="country_list">
-            <CardCountry v-bind:countries="countries" />
+            <CardCountry v-bind:countries="filteredCountries" />
         </ul>
     </div>
 </template>
+
 <script>
 import CardCountry from './CardCountry.vue';
 
@@ -13,7 +14,7 @@ export default {
         CardCountry
     },
     props: {
-        countries: {
+        filteredCountries: {
             type: Object,
             required: true,
         },
@@ -30,26 +31,13 @@ export default {
     flex-direction: column;
     align-items: center;
 }
-.country_item {
-    background: white;
-    border-radius: 5px;
-    box-shadow: 0 0 .3rem rgba(0, 0, 0, .1);
-    margin: 1rem 0;
-    overflow: hidden;
-    width: 80%;
-    max-width: 300px;
+@media (min-width: 868px) {
+    .country_list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 }
 
-.country_body {
-    padding: 2rem;
-}
-
-.country_body > div {
-    padding: .3rem 0;
-}
-
-.country_flag {
-    width: 100%;
-}
     
 </style>

@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1>Where in the world?</h1>
+    <router-link to="/"><h1>Where in the world?</h1></router-link>
     <div id="theme_switch">
       <svg
         width="20"
