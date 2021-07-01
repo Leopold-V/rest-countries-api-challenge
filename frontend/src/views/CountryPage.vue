@@ -11,8 +11,14 @@
                 <div><span style="font-weight: bold">Sub Region:</span> {{country.subregion}}</div>
                 <div><span style="font-weight: bold">Capital:</span> {{country.capital}}</div>
                 <div><span style="font-weight: bold">Top Level Domain:</span> {{country.topLevelDomain}}</div>
-                <div><span style="font-weight: bold">Currencies:</span> Euro</div>
-                <div><span style="font-weight: bold">Languages:</span> Français</div>
+                <div>
+                    <span style="font-weight: bold">Currencies: </span>
+                    <span v-for="curr in country.currencies">{{curr.name + ' '}}</span>
+                </div>
+                <div>
+                    <span style="font-weight: bold">Languages: </span>
+                    <span v-for="lang in country.languages">{{ lang.name+ ' '}}</span>
+                </div>
             </div>
             <div class="country_border"><span style="font-weight: bold">Border Countries: </span>
                 <a>France</a>
