@@ -23,15 +23,20 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .country_item {
     background: white;
     border-radius: 5px;
     box-shadow: 0 0 .3rem rgba(0, 0, 0, .1);
     margin: 1rem 0;
     overflow: hidden;
-    width: 300px;
     height: 400px;
+    width: 300px;
+    transition: all .3s;
+}
+.country_item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 .4rem rgba(0, 0, 0, .2);
 }
 
 .country_body {
@@ -48,7 +53,7 @@ export default {
 }
 @media (min-width: 868px) {
     .country_item {
-        margin: 1rem 1rem !important;
-    }
+       width: auto;
+    } 
 }
 </style>

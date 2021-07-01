@@ -1,20 +1,18 @@
 <template>
 <div id="container_filters">
-    <form>
-        <div id="search_country">
-            <input
-                v-model="input"
-                type="text"
-                placeholder="Search for a country..."
-            />
-            <button><i class="fas fa-search"></i></button>
-        </div>
-    </form>
+    <div id="search_country">
+        <input
+            v-model="input"
+            type="text"
+            placeholder="Search for a country..."
+        />
+        <button><i class="fas fa-search"></i></button>
+    </div>
     <div id="region_filter">
         <select v-model="region">
             <option value="">Filter by Region</option>
             <option>Africa</option>
-            <option>America</option>
+            <option>Americas</option>
             <option>Asia</option>
             <option>Europe</option>
             <option>Oceania</option>
@@ -65,17 +63,19 @@ export default {
 }
 
 </script>
-<style>
+<style scoped>
+
 #container_filters {
     padding: 2rem 1.5rem;
 }
+
 #region_filter {
     margin-top: 3rem;
 }
 input {
     border: none;
     width: 100%;
-    padding: 1.4rem 0;
+    padding: 1.2rem 0;
     font-size: 14px;
 }
 
@@ -111,6 +111,30 @@ button {
     align-items: center;
     flex-direction: row-reverse;
     padding-left: 1rem;
+}
+select {
+    background: white;
+    box-shadow: 0 0 .5rem rgba(0, 0, 0, .1);
+    border-radius: 8px;
+    padding: 1.2rem 1rem;
+    border: none;
+    cursor: pointer;
+}
+
+@media (min-width: 868px) {
+    #container_filters {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2rem 4rem;
+    }
+    #region_filter {
+        margin-top: 0rem;
+    }
+    input {
+        width: 350px;
+    }
 }
     
 </style>

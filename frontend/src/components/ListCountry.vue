@@ -22,7 +22,7 @@ export default {
 }
 
 </script>
-<style>
+<style scoped>
 #container_list {
     padding: 0 2rem;
 }
@@ -33,9 +33,12 @@ export default {
 }
 @media (min-width: 868px) {
     .country_list {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
+        display: grid;
+        grid-gap: 63px;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+    #container_list {
+        padding: 0 4rem;
     }
 }
 

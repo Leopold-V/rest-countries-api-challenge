@@ -43,4 +43,10 @@ header {
   box-shadow: 0 0 .5rem rgba(0, 0, 0, .2);
   padding: 1rem 1.3rem;
 }
+@media (min-width: 868px) {
+  header {
+    height: 2rem;
+    padding: 1rem 4rem;
+  }
+}
 </style>
