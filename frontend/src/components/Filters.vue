@@ -84,7 +84,7 @@ input:focus {
 }
 
 input:focus + button > i {
-    color: rgb(85, 85, 85);
+    color: hsl(0, 0%, 52%);
 }
 
 i {

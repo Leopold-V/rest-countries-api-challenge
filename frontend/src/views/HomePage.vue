@@ -35,6 +35,7 @@ export default {
         async fetchCountry() {
             const response = await fetch('https://restcountries.eu/rest/v2/all');
             const json = await response.json();
+            console.log(json);
             this.countries = json;
         },
         setCountries(countries) {

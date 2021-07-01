@@ -33,10 +33,12 @@ a {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  color: hsl(200, 15%, 8%);
   font-size: 14px;
+  background-color: hsl(0, 0%, 98%);
 }
 .container_page {
   padding: 2rem 4rem;
+  min-height: 100vh;
 }
 </style>
