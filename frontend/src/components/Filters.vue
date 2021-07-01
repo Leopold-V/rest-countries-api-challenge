@@ -65,10 +65,6 @@ export default {
 </script>
 <style scoped>
 
-#container_filters {
-    padding: 2rem 1.5rem;
-}
-
 #region_filter {
     margin-top: 3rem;
 }
@@ -127,7 +123,6 @@ select {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        padding: 2rem 4rem;
     }
     #region_filter {
         margin-top: 0rem;

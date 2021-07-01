@@ -1,16 +1,16 @@
 <template>
   <Header />
-  <router-view></router-view>
+  <div class="container_page">
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
 import Header from "./components/Header.vue";
-import MainContent from "./components/MainContent.vue";
 
 export default {
     components: {
         Header,
-        MainContent
     }
 }
 </script>
@@ -35,5 +35,8 @@ a {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   font-size: 14px;
+}
+.container_page {
+  padding: 2rem 4rem;
 }
 </style>

@@ -23,9 +23,7 @@ export default {
 
 </script>
 <style scoped>
-#container_list {
-    padding: 0 2rem;
-}
+
 .country_list {
     display: flex;
     flex-direction: column;
@@ -36,9 +34,6 @@ export default {
         display: grid;
         grid-gap: 63px;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    }
-    #container_list {
-        padding: 0 4rem;
     }
 }
 

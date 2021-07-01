@@ -3,28 +3,32 @@
     <div v-if="!loading">
         <ListCountry :filteredCountries="filteredCountries" />
     </div>
-    <div v-else>
-        Loading...
+    <div class="loading_spinner" v-else>
+        <GridLoader :loading="true" :size="size"></GridLoader>
     </div>
 </template>
 
 <script>
-import Filters from './Filters.vue';
-import ListCountry from './ListCountry.vue';
+import Filters from '../components/Filters.vue';
+import ListCountry from '../components/ListCountry.vue';
+import GridLoader from 'vue-spinner/src/GridLoader.vue';
 
 export default {
     components: {
         ListCountry,
-        Filters
+        Filters,
+        GridLoader
     },
     data() {
         const countries = [];
         const filteredCountries = [];
         let loading = true;
+        const size = '30px';
         return {
             countries,
             filteredCountries,
             loading,
+            size
         }
     },
     methods: {
@@ -46,5 +50,13 @@ export default {
 
 </script>
 <style>
-    
+    .loading_spinner {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5rem 0;
+        height: 300px;
+        /*margin: 0 auto;*/
+    }
 </style>
