@@ -1,14 +1,9 @@
-export const filterByName = async () => {
-    e.preventDefault();
-    if (this.input) {
-        const response = await fetch(`https://restcountries.eu/rest/v2/name/${this.input}`)
+export const findOneByName = async (name) => {
+    try {
+        const response = await fetch(`https://restcountries.eu/rest/v2/name/${name}`)
         const json = await response.json();
-        this.$emit('update-countries', json);
+        return json[0];
+    } catch (error) {
+        console.log(error);   
     }
-};
-
-export const filterByRegion = async () => {
-    const response = await fetch(`https://restcountries.eu/rest/v2/region/${this.region}`)
-    const json = await response.json();
-    this.$emit('update-countries', json);
 };
