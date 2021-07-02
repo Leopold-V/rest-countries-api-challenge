@@ -12,6 +12,7 @@
 import Filters from '../components/Filters.vue';
 import ListCountry from '../components/ListCountry.vue';
 import GridLoader from 'vue-spinner/src/GridLoader.vue';
+import { getAllCountry } from '../api/country';
 
 export default {
     components: {
@@ -22,8 +23,8 @@ export default {
     data() {
         const countries = [];
         const filteredCountries = [];
-        let loading = true;
         const size = '30px';
+        let loading = true;
         return {
             countries,
             filteredCountries,
@@ -32,18 +33,12 @@ export default {
         }
     },
     methods: {
-        async fetchCountry() {
-            const response = await fetch('https://restcountries.eu/rest/v2/all');
-            const json = await response.json();
-            console.log(json);
-            this.countries = json;
-        },
         setCountries(countries) {
             this.filteredCountries = countries;
         }
     },
     async created() {
-        await this.fetchCountry();
+        this.countries = await getAllCountry();
         this.filteredCountries = this.countries;
         this.loading = false;
     }

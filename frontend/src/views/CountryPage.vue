@@ -1,32 +1,34 @@
 <template lang="">
     <button @click="goBack"><i class="fas fa-arrow-left"></i> Back</button>
-    <div class="wrapper">
-        <img class="country_flag" :src="country.flag" alt="flag"/>
-        <div class="country_information">
-            <h2 class="country_title">{{ country.name }}</h2>
-            <div class="country_data">
-                <div><span style="font-weight: bold">Native Name:</span> {{country.nativeName}}</div>
-                <div><span style="font-weight: bold">Population:</span> {{country.population}}</div>
-                <div><span style="font-weight: bold">Region:</span> {{country.region}}</div>
-                <div><span style="font-weight: bold">Sub Region:</span> {{country.subregion}}</div>
-                <div><span style="font-weight: bold">Capital:</span> {{country.capital}}</div>
-                <div><span style="font-weight: bold">Top Level Domain:</span> {{country.topLevelDomain}}</div>
-                <div>
-                    <span style="font-weight: bold">Currencies: </span>
-                    <span v-for="curr in country.currencies">{{curr.name + ' '}}</span>
+    <div v-if="!loading">
+        <div class="wrapper">
+            <img class="country_flag" :src="country.flag" alt="flag"/>
+            <div class="country_information">
+                <h2 class="country_title">{{ country.name }}</h2>
+                <div class="country_data">
+                    <div><span style="font-weight: bold">Native Name:</span> {{country.nativeName}}</div>
+                    <div><span style="font-weight: bold">Population:</span> {{country.population}}</div>
+                    <div><span style="font-weight: bold">Region:</span> {{country.region}}</div>
+                    <div><span style="font-weight: bold">Sub Region:</span> {{country.subregion}}</div>
+                    <div><span style="font-weight: bold">Capital:</span> {{country.capital}}</div>
+                    <div><span style="font-weight: bold">Top Level Domain:</span> {{country.topLevelDomain}}</div>
+                    <div>
+                        <span style="font-weight: bold">Currencies: </span>
+                        <span v-for="curr in country.currencies">{{curr.name + ' '}}</span>
+                    </div>
+                    <div>
+                        <span style="font-weight: bold">Languages: </span>
+                        <span v-for="lang in country.languages">{{ lang.name+ ' '}}</span>
+                    </div>
                 </div>
-                <div>
-                    <span style="font-weight: bold">Languages: </span>
-                    <span v-for="lang in country.languages">{{ lang.name+ ' '}}</span>
-                </div>
-            </div>
-            <div class="country_border">
-                <span class="country_border-title">Border Countries: </span>
-                <div v-show="!loading">
-                    <div v-for="border in country.borders">
-                        <router-link :to="{name: 'Country' , params:{ name: getBorders(border) }}">
-                            {{ getBorders(border) }}
-                        </router-link>
+                <div class="country_border">
+                    <span class="country_border-title">Border Countries: </span>
+                    <div>
+                        <div v-for="border in country.borders">
+                            <router-link :to="{name: 'Country' , params:{ name: getBorders(border) }}">
+                                {{ getBorders(border) }}
+                            </router-link>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -35,7 +37,7 @@
 </template>
 <script>
 import router from '../router';
-import { findOneByName } from '../api/country';
+import { getAllCountry, getOneByName } from '../api/country';
 
 export default {
     data() {
@@ -50,21 +52,16 @@ export default {
     },
     methods: {
         goBack() {
-            router.back()
-        },
-        async fetchCountry() {
-            const response = await fetch('https://restcountries.eu/rest/v2/all');
-            const json = await response.json();
-            this.countries = json;
-            this.loading = false;
+            router.replace('/')
         },
         getBorders(border) {
             return this.countries.filter((ele) => (ele.alpha3Code === border))[0].name;
         }
     },
     async created() {
-        await this.fetchCountry();
-        this.country = await findOneByName(router.currentRoute._value.params.name);
+        this.countries = await getAllCountry();
+        this.country = await getOneByName(router.currentRoute._value.params.name);
+        this.loading = false;
     }
 }
 </script>
@@ -116,7 +113,7 @@ export default {
     }
     .country_flag {
         width: 40%;
-        height: 370px;
+        /*height: 370px;*/
     }
     .country_border {
         padding: 3rem 0rem;
@@ -127,6 +124,7 @@ export default {
     .country_border > div {
         display: flex;
         flex-wrap: wrap;
+        width: 100%;
     }
     .country_border > div > div {
         background: white;
@@ -148,11 +146,14 @@ export default {
             flex-wrap: wrap;
             align-items: flex-start;
         }
-        .country_flag {
+         .country_flag {
             width: 100%;
         }
-        .country_data {
+        .country_information {
             width: 100%;
+            height: auto;
+        }
+        .country_data {
             height: auto;
         }
         .country_border {
