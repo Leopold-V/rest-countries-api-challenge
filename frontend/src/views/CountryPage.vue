@@ -20,10 +20,15 @@
                     <span v-for="lang in country.languages">{{ lang.name+ ' '}}</span>
                 </div>
             </div>
-            <div class="country_border"><span style="font-weight: bold">Border Countries: </span>
-                <a>France</a>
-                <a>Germany</a>
-                <a>Spain</a>
+            <div class="country_border">
+                <span class="country_border-title">Border Countries: </span>
+                <div v-show="!loading">
+                    <div v-for="border in country.borders">
+                        <router-link :to="{name: 'Country' , params:{ name: getBorders(border) }}">
+                            {{ getBorders(border) }}
+                        </router-link>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -35,16 +40,30 @@ import { findOneByName } from '../api/country';
 export default {
     data() {
         let country = {};
+        const countries = [];
+        let loading = true;
         return {
-            country
+            country,
+            countries,
+            loading
         }
     },
     methods: {
         goBack() {
             router.back()
+        },
+        async fetchCountry() {
+            const response = await fetch('https://restcountries.eu/rest/v2/all');
+            const json = await response.json();
+            this.countries = json;
+            this.loading = false;
+        },
+        getBorders(border) {
+            return this.countries.filter((ele) => (ele.alpha3Code === border))[0].name;
         }
     },
     async created() {
+        await this.fetchCountry();
         this.country = await findOneByName(router.currentRoute._value.params.name);
     }
 }
@@ -101,15 +120,26 @@ export default {
     }
     .country_border {
         padding: 3rem 0rem;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
     }
-    .country_border > a {
+    .country_border > div {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .country_border > div > div {
         background: white;
         box-shadow: 0 0 .5rem rgba(0, 0, 0, .1);
         border-radius: 4px;
         padding: .5rem 1.7rem;
         border: none;
         cursor: pointer;
-        margin: 0 .3rem;
+        margin: .3rem;
+    }
+    .country_border-title {
+        font-weight: bold;
+        margin: .5rem;
     }
     @media (max-width: 868px) {
         .wrapper {
@@ -123,6 +153,15 @@ export default {
         }
         .country_data {
             width: 100%;
+            height: auto;
+        }
+        .country_border {
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        .country_border-title {
+            margin: 1rem 0;
         }
     }
 </style>
