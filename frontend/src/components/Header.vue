@@ -1,7 +1,7 @@
 <template>
   <header>
     <router-link to="/"><h1>Where in the world?</h1></router-link>
-    <div id="theme_switch">
+    <div id="theme_switch" @click="$emit('switch-theme')">
       <svg
         width="20"
         xmlns="http://www.w3.org/2000/svg"
@@ -22,6 +22,8 @@
 </template>
 
 <script>
+export default {
+}
 
 </script>
 
@@ -29,11 +31,10 @@
 #theme_switch {
   display: flex;
   align-items: center;
-  color: black;
+  cursor: pointer;
 }
 h1 {
   font-size: 16px;
-  color: black;
 }
 header {
   height: 4rem;

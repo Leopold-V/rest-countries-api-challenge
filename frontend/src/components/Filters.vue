@@ -73,6 +73,7 @@ input {
     width: 100%;
     padding: 1.2rem 0;
     font-size: 14px;
+    border-radius: 8px;
 }
 
 ::placeholder {

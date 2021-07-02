@@ -24,7 +24,7 @@
                 <div class="country_border">
                     <span class="country_border-title">Border Countries: </span>
                     <div>
-                        <div v-for="border in country.borders">
+                        <div v-for="border in country.borders" :key="border.name">
                             <router-link :to="{name: 'Country' , params:{ name: getBorders(border) }}">
                                 {{ getBorders(border) }}
                             </router-link>

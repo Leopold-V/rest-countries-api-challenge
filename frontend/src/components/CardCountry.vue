@@ -1,5 +1,5 @@
 <template>
-    <li class="country_item" v-for="country in countries">
+    <li class="country_item" v-for="country in countries" :key="country.name">
         <router-link :to="{name: 'Country' , params:{ name: country.name }}">
             <img class="country_flag" v-bind:src="country.flag" alt="flag"/>
             <div class="country_body">
@@ -25,7 +25,6 @@ export default {
 
 <style scoped>
 .country_item {
-    background: white;
     border-radius: 5px;
     box-shadow: 0 0 .3rem rgba(0, 0, 0, .1);
     margin: 1rem 0;
