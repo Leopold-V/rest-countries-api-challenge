@@ -20,6 +20,12 @@ export default {
         Filters,
         GridLoader
     },
+    props: {
+        theme: {
+            type: String,
+            required: true,
+        },
+    },
     data() {
         const countries = [];
         const filteredCountries = [];

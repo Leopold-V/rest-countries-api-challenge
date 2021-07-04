@@ -1,7 +1,7 @@
 <template lang="">
     <button @click="goBack"><i class="fas fa-arrow-left"></i> Back</button>
     <div v-if="!loading">
-        <div class="wrapper">
+        <div class="wrapper" :class="theme === 'light' ? 'light' : 'dark'">
             <img class="country_flag" :src="country.flag" alt="flag"/>
             <div class="country_information">
                 <h2 class="country_title">{{ country.name }}</h2>
@@ -40,6 +40,12 @@ import router from '../router';
 import { getAllCountry, getOneByName } from '../api/country';
 
 export default {
+    props: {
+        theme: {
+            type: String,
+            required: true,
+        },
+    },
     data() {
         let country = {};
         const countries = [];

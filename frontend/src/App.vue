@@ -1,7 +1,7 @@
 <template>
   <Header v-on:switch-theme="switchTheme"/>
   <div class="container_page">
-    <router-view :key="$route.path"></router-view>
+    <router-view :key="$route.path" :theme="theme"></router-view>
   </div>
 </template>
 
@@ -12,24 +12,27 @@ export default {
     components: {
         Header,
     },
+    data() {
+      let theme;
+      return {
+        theme,
+      }
+    },
     methods: {
       switchTheme() {
         if (localStorage.getItem('theme') === 'light') {
           localStorage.setItem('theme', 'dark');
-          const body = document.querySelector('body');
-          body.style.color = 'hsl(0, 0%, 98%)';
-          body.style.backgroundColor = 'hsl(200, 15%, 8%)';
+          this.theme = 'dark';
         } else {
           localStorage.setItem('theme', 'light');
-          const body = document.querySelector('body');
-          body.style.color = 'hsl(200, 15%, 8%)';
-          body.style.backgroundColor = 'hsl(0, 0%, 98%)';
+          this.theme = 'light';
         }
       }
     },
     created() {
       if (!localStorage.getItem('theme')) {
         localStorage.setItem('theme', 'light');
+        this.theme = 'light';
       } else {
         this.theme = localStorage.getItem('theme');
       }
