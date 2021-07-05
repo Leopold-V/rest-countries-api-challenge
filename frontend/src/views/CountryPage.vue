@@ -6,12 +6,12 @@
             <div class="country_information">
                 <h2 class="country_title">{{ country.name }}</h2>
                 <div class="country_data">
-                    <div><span style="font-weight: bold">Native Name:</span> {{country.nativeName}}</div>
-                    <div><span style="font-weight: bold">Population:</span> {{country.population}}</div>
-                    <div><span style="font-weight: bold">Region:</span> {{country.region}}</div>
-                    <div><span style="font-weight: bold">Sub Region:</span> {{country.subregion}}</div>
-                    <div><span style="font-weight: bold">Capital:</span> {{country.capital}}</div>
-                    <div><span style="font-weight: bold">Top Level Domain:</span> {{country.topLevelDomain}}</div>
+                    <div><span style="font-weight: 600">Native Name:</span> {{country.nativeName}}</div>
+                    <div><span style="font-weight: 600">Population:</span> {{country.population}}</div>
+                    <div><span style="font-weight: 600">Region:</span> {{country.region}}</div>
+                    <div><span style="font-weight: 600">Sub Region:</span> {{country.subregion}}</div>
+                    <div><span style="font-weight: 600">Capital:</span> {{country.capital}}</div>
+                    <div><span style="font-weight: 600">Top Level Domain:</span> {{country.topLevelDomain}}</div>
                     <div>
                         <span style="font-weight: bold">Currencies: </span>
                         <span v-for="curr in country.currencies">{{curr.name + ' '}}</span>

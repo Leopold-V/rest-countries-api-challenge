@@ -4,9 +4,9 @@
             <img class="country_flag" v-bind:src="country.flag" alt="flag"/>
             <div class="country_body">
                 <h2>{{ country.name }}</h2>
-                <div><span style="font-weight: bold">Population :</span> {{country.population}} </div>
-                <div><span style="font-weight: bold">Region :</span> {{country.region}} </div>
-                <div><span style="font-weight: bold">Capital :</span> {{country.capital}} </div>
+                <div><span style="font-weight: 600">Population :</span> {{country.population}} </div>
+                <div><span style="font-weight: 600">Region :</span> {{country.region}} </div>
+                <div><span style="font-weight: 600">Capital :</span> {{country.capital}} </div>
             </div>
         </router-link>
     </li>
@@ -46,7 +46,7 @@ export default {
 }
 
 .country_body {
-    padding: 2rem;
+    padding: 1rem 2rem;
 }
 
 .country_body > div {

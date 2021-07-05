@@ -67,10 +67,11 @@ a {
   color: inherit;
 }
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Nunito Sans', sans-serif, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 14px;
+  font-weight: 300;
 }
 .container_page {
   padding: 2rem 4rem;
