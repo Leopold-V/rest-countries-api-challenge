@@ -1,5 +1,5 @@
 <template>
-    <li class="country_item" v-for="country in countries" :key="country.name">
+    <li class="country_item" :class="theme === 'light' ? '' : 'dark'" v-for="country in countries" :key="country.name">
         <router-link :to="{name: 'Country' , params:{ name: country.name }}">
             <img class="country_flag" v-bind:src="country.flag" alt="flag"/>
             <div class="country_body">
@@ -18,6 +18,10 @@ export default {
         countries: {
             type: Object,
             required: true,
+        }, 
+        theme: {
+            type: String,
+            required: true
         }
     },
 }
@@ -30,8 +34,11 @@ export default {
     margin: 1rem 0;
     overflow: hidden;
     height: 400px;
-    width: 300px;
+    width: 280px;
     transition: all .3s;
+}
+.country_item.dark {
+    background:hsl(209, 23%, 22%);
 }
 .country_item:hover {
     transform: translateY(-4px);
@@ -48,7 +55,8 @@ export default {
 
 .country_flag {
     width: 100%;
-    height: 45%;
+    height: 50%;
+    object-fit: fill;
 }
 @media (min-width: 868px) {
     .country_item {

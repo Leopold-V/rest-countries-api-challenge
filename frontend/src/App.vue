@@ -1,8 +1,10 @@
 <template>
-  <Header v-on:switch-theme="switchTheme"/>
+<div class="theme" :class="theme === 'light' ? '' : 'dark'">
+  <Header :theme="theme" v-on:switch-theme="switchTheme"/>
   <div class="container_page">
     <router-view :key="$route.path" :theme="theme"></router-view>
   </div>
+</div>
 </template>
 
 <script>
@@ -42,12 +44,19 @@ export default {
 </script>
 
 <style>
+.theme {
+  color: hsl(200, 15%, 8%);
+  background-color: hsl(0, 0%, 98%);
+}
+.dark {
+  color: hsl(0, 0%, 100%);
+  background-color:hsl(207, 26%, 17%);
+}
 body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  color: hsl(200, 15%, 8%);
-  background-color: hsl(0, 0%, 98%);
+
 }
 ul {
   list-style: none;
@@ -66,5 +75,7 @@ a {
 .container_page {
   padding: 2rem 4rem;
   min-height: 100vh;
+  
+
 }
 </style>

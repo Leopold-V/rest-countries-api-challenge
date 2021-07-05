@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <div class="header" :class="theme === 'light' ? '' : 'dark'">
     <router-link to="/"><h1>Where in the world?</h1></router-link>
     <div id="theme_switch" @click="$emit('switch-theme')">
       <svg
@@ -18,11 +18,17 @@
       </svg>
       <span style="margin-left: .5rem">Dark Mode</span>
     </div>
-  </header>
+  </div>
 </template>
 
 <script>
 export default {
+    props: {
+      theme: {
+          type: String,
+          required: true,
+      },
+    },
 }
 
 </script>
@@ -36,13 +42,16 @@ export default {
 h1 {
   font-size: 16px;
 }
-header {
+.header {
   height: 4rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 0 .5rem rgba(0, 0, 0, .2);
   padding: 1rem 1.3rem;
+}
+.header.dark {
+  background:hsl(209, 23%, 22%);
 }
 @media (min-width: 868px) {
   header {

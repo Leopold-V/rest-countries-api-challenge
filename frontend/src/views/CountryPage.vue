@@ -1,7 +1,7 @@
 <template lang="">
-    <button @click="goBack"><i class="fas fa-arrow-left"></i> Back</button>
+    <button @click="goBack" :class="theme === 'light' ? '' : 'dark'"><i class="fas fa-arrow-left"></i> Back</button>
     <div v-if="!loading">
-        <div class="wrapper" :class="theme === 'light' ? 'light' : 'dark'">
+        <div class="wrapper">
             <img class="country_flag" :src="country.flag" alt="flag"/>
             <div class="country_information">
                 <h2 class="country_title">{{ country.name }}</h2>
@@ -24,7 +24,7 @@
                 <div class="country_border">
                     <span class="country_border-title">Border Countries: </span>
                     <div>
-                        <div v-for="border in country.borders" :key="border.name">
+                        <div v-for="border in country.borders" :key="border.name" :class="theme === 'light' ? '' : 'dark'">
                             <router-link :to="{name: 'Country' , params:{ name: getBorders(border) }}">
                                 {{ getBorders(border) }}
                             </router-link>
@@ -127,13 +127,16 @@ export default {
         align-items: center;
         flex-wrap: wrap;
     }
+    .dark {
+        background:hsl(209, 23%, 22%);
+        color: hsl(0, 0%, 100%);
+    }
     .country_border > div {
         display: flex;
         flex-wrap: wrap;
         width: 100%;
     }
     .country_border > div > div {
-        background: white;
         box-shadow: 0 0 .5rem rgba(0, 0, 0, .1);
         border-radius: 4px;
         padding: .5rem 1.7rem;

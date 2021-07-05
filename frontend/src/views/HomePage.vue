@@ -1,7 +1,7 @@
 <template>
-    <Filters :countries="countries" v-on:update-countries="setCountries" />
+    <Filters :theme="theme" :countries="countries" v-on:update-countries="setCountries" />
     <div v-if="!loading">
-        <ListCountry :filteredCountries="filteredCountries" />
+        <ListCountry :theme="theme" :filteredCountries="filteredCountries" />
     </div>
     <div class="loading_spinner" v-else>
         <GridLoader :loading="true" :size="size"></GridLoader>

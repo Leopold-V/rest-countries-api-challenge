@@ -1,5 +1,5 @@
 <template>
-<div id="container_filters">
+<div id="container_filters" :class="theme === 'light' ? '' : 'dark'">
     <div id="search_country">
         <input
             v-model="input"
@@ -27,6 +27,10 @@ export default {
         countries: {
             type: Object,
             required: true,
+        },
+        theme: {
+            type: String,
+            required: true
         }
     },
     data() {
@@ -67,6 +71,17 @@ export default {
 
 #region_filter {
     margin-top: 3rem;
+}
+.dark #search_country {
+    background:hsl(209, 23%, 22%);
+}
+.dark #search_country input {
+    background:hsl(209, 23%, 22%);
+    color: hsl(0, 0%, 100%);
+}
+.dark #region_filter select {
+    background:hsl(209, 23%, 22%);
+    color: hsl(0, 0%, 100%);
 }
 input {
     border: none;

@@ -1,7 +1,7 @@
 <template>
     <div id="container_list">
         <ul class="country_list">
-            <CardCountry v-bind:countries="filteredCountries" />
+            <CardCountry :theme="theme" v-bind:countries="filteredCountries" />
         </ul>
     </div>
 </template>
@@ -18,6 +18,10 @@ export default {
             type: Object,
             required: true,
         },
+        theme: {
+            type: String,
+            required: true
+        }
     },
 }
 
